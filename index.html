@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input id="form-controls" class="form-control" type="text">
+                    <button id="btn" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input id="input" class="form-control" type="text">
+                    <div class="numbers">
+                        <section id="num"  class="calc-body">
+                            <div class="calc-button-row">
+                              <div  class="button">7</div>
+                              <div  class="button">8</div>
+                              <div class="button">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div  class="button">4</div>
+                              <div class="button">6</div>
+                              <div class="button">5</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div  class="button">1</div>
+                              <div  class="button">2</div>
+                              <div class="button">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button"><</div>
+                                <div  class="button">0</div>
+                                <div class="button">C</div>
+                            </div>
+                            <!--hum  -->
+                    </div>
+                </section>
+                <div>
+                    <button onclick="verifyPin()" type="submit" class="submit-btn">Submit</button>
+                    <p class="action-left">3 try left</p>
+                </div>
+                <!-- yo -->
+            </div>
+        </div>
+        <div class="notify-section">
+            <p id="not" class="notify"><i  class="far fa-times-circle text-danger fs-1"></i> Pin Didn't Match, Please try again</p>
+            <p id="good" class="notify"><i class="fas fa-check-square text-primary fs-1"></i> Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById("btn").addEventListener("click",function(){
+            var formcontrols = document.getElementById("form-controls");
+            formcontrolsNum = parseFloat(formcontrols.value);
+        formcontrolsNum = (Math.random()*10000+"").split(".")[0];
+        if(formcontrolsNum.length != 4){
+            return formcontrolsNum
+        }
+       
+        formcontrols.value = formcontrolsNum
+        })
+
+        // next
+      document.getElementById("num").addEventListener("click",function(event){
+          var digit = event.target.innerText;
+
+          if(isNaN(digit)){
+                         //   is not a num
+           
+          }
+          if(digit === "C"){
+            var input = document.getElementById("input");
+            input.value = ""
+          }
+         else{
+             var input = document.getElementById("input");
+             input.value = input.value + digit;
+         }
+       })
+
+        // verufy pin
+       function verifyPin(){
+        var formcontrols = document.getElementById("form-controls").value;
+        var input = document.getElementById("input").value;
+        if(formcontrols===input){
+          var good = document.getElementById("good");
+          good.style.display = "block"
+                              //   another
+          var not = document.getElementById("not");
+            not.style.display = "none"
+           
+        }
+        else{
+            var not = document.getElementById("not");
+            not.style.display = "block"
+                            // another
+            var good = document.getElementById("good");
+          good.style.display = "none"
+         
+        }
+       }
+    </script>
+     <script src="https://kit.fontawesome.com/ee3c098242.js" crossorigin="anonymous"> </script>
+</body>
+</html>
